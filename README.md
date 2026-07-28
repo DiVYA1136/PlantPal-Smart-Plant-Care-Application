@@ -159,7 +159,3 @@ firebase init hosting
 npm run build
 firebase deploy
 ```
-
----
-*Created as a Senior Developer Portfolio Showcase Application.*
-"# PlantPal-Smart-Plant-Care-Application" 
