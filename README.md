@@ -1,9 +1,12 @@
 # PlantPal – Smart Plant Care Assistant 🌿
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://plant-pal-smart-plant-care-applicat.vercel.app/)
 [![React](https://img.shields.io/badge/React-18.3-61DAFB?logo=react)](https://reactjs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![Firebase](https://img.shields.io/badge/Firebase-10.12-FFCA28?logo=firebase)](https://firebase.google.com/)
 [![Vite](https://img.shields.io/badge/Vite-5.2-646CFF?logo=vite)](https://vitejs.dev/)
+
+🚀 **Live App**: [https://plant-pal-smart-plant-care-applicat.vercel.app/](https://plant-pal-smart-plant-care-applicat.vercel.app/)
 
 **PlantPal** is a smart plant care assistant application featuring automated watering scheduling, growth tracking charts, AI leaf disease diagnostics, exportable PDF care passports, micro-climate weather integration, voice search, and a complete admin management console.
 
