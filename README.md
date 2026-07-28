@@ -5,7 +5,7 @@
 [![Firebase](https://img.shields.io/badge/Firebase-10.12-FFCA28?logo=firebase)](https://firebase.google.com/)
 [![Vite](https://img.shields.io/badge/Vite-5.2-646CFF?logo=vite)](https://vitejs.dev/)
 
-**PlantPal** is a production-ready, SaaS-grade smart plant care assistant application designed for software engineering portfolio demonstrations. Modeled after top consumer botanical apps like *Planta*, *Greg*, and *Blossom*, PlantPal features automated watering scheduling, growth tracking charts, AI leaf disease diagnostics, exportable PDF care passports, micro-climate weather integration, voice search, and a complete admin management console.
+**PlantPal** is a smart plant care assistant application featuring automated watering scheduling, growth tracking charts, AI leaf disease diagnostics, exportable PDF care passports, micro-climate weather integration, voice search, and a complete admin management console.
 
 ---
 
