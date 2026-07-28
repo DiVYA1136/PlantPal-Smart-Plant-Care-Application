@@ -1,0 +1,20 @@
+{
+  "short_name": "PlantPal",
+  "name": "PlantPal Smart Plant Care Assistant",
+  "icons": [
+    {
+      "src": "https://img.icons8.com/emoji/96/potted-plant-emoji.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "https://img.icons8.com/emoji/512/potted-plant-emoji.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#16a34a",
+  "display": "standalone"
+}
