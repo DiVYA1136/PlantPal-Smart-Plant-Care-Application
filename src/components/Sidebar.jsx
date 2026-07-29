@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { useTheme } from '../contexts/ThemeContext';
 import { 
   LayoutDashboard, 
   Flower2, 
@@ -11,13 +12,17 @@ import {
   User, 
   ShieldCheck, 
   LogOut,
+  LogIn,
   X,
-  Sparkles
+  Sprout,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 export const Sidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
   const { currentUser, logout } = useAuth();
+  const { darkMode, toggleDarkMode } = useTheme();
 
   const links = [
     { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -38,6 +43,23 @@ export const Sidebar = ({ isOpen, onClose }) => {
 
   return (
     <>
+      {/* Mobile Top Header Bar with Mobile Menu Toggle */}
+      <div className="lg:hidden sticky top-0 z-30 w-full glass-panel border-b border-slate-200/80 dark:border-slate-800/80 px-4 py-3 flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
+            <Sprout className="w-5 h-5" />
+          </div>
+          <span className="font-extrabold text-lg text-slate-900 dark:text-white tracking-tight">PlantPal</span>
+        </Link>
+        <button
+          onClick={onClose}
+          className="p-2 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none"
+          aria-label="Toggle Navigation Menu"
+        >
+          {isOpen ? <X size={24} /> : <div className="space-y-1.5 w-6"><div className="h-0.5 w-6 bg-current rounded"></div><div className="h-0.5 w-6 bg-current rounded"></div><div className="h-0.5 w-6 bg-current rounded"></div></div>}
+        </button>
+      </div>
+
       {/* Backdrop for mobile */}
       {isOpen && (
         <div
@@ -48,21 +70,39 @@ export const Sidebar = ({ isOpen, onClose }) => {
 
       {/* Sidebar container */}
       <aside
-        className={`fixed lg:static top-0 left-0 z-50 h-full w-64 glass-panel border-r border-slate-200/80 dark:border-slate-800/80 flex flex-col justify-between transition-transform duration-300 ${
+        className={`fixed lg:sticky top-0 left-0 z-50 h-screen w-64 glass-panel border-r border-slate-200/80 dark:border-slate-800/80 flex flex-col justify-between transition-transform duration-300 ${
           isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
-        <div className="p-4">
-          <div className="flex items-center justify-between lg:hidden mb-6">
-            <div className="flex items-center gap-2">
-              <span className="font-extrabold text-lg text-emerald-600 dark:text-emerald-400">PlantPal</span>
+        <div className="p-4 overflow-y-auto flex-1">
+          {/* Header Brand */}
+          <div className="flex items-center justify-between mb-6 pt-2 px-1">
+            <Link to="/" onClick={onClose} className="flex items-center gap-2.5 group">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform duration-200">
+                <Sprout className="w-6 h-6" />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-extrabold text-xl tracking-tight text-slate-900 dark:text-white">
+                  PlantPal
+                </span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 -mt-1 font-medium">Smart Care Assistant</span>
+              </div>
+            </Link>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={toggleDarkMode}
+                className="p-2 rounded-xl text-slate-600 hover:text-emerald-600 dark:text-slate-300 dark:hover:text-emerald-400 bg-slate-100 dark:bg-slate-800/60 transition-colors"
+                title="Toggle Theme"
+              >
+                {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+              </button>
+              <button
+                onClick={onClose}
+                className="lg:hidden p-1.5 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800"
+              >
+                <X size={20} />
+              </button>
             </div>
-            <button
-              onClick={onClose}
-              className="p-1 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800"
-            >
-              <X size={20} />
-            </button>
           </div>
 
           <div className="space-y-1">
@@ -91,35 +131,40 @@ export const Sidebar = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        {/* Bottom User Card */}
+        {/* Bottom Auth / Sign In Section */}
         <div className="p-4 border-t border-slate-200/80 dark:border-slate-800/80 bg-slate-50/50 dark:bg-slate-900/50">
-          <div className="flex items-center gap-3 mb-3">
-            <img
-              src={currentUser?.photoURL || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'}
-              alt="User Avatar"
-              className="w-9 h-9 rounded-full object-cover border border-emerald-500/30"
-            />
-            <div className="flex-1 min-w-0">
-              <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
-                {currentUser?.displayName || 'Alex Rivers'}
-              </p>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
-                {currentUser?.email || 'alex@plantpal.io'}
-              </p>
+          {currentUser ? (
+            <div className="space-y-2">
+              <div className="px-2 py-1">
+                <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                  {currentUser.displayName || 'Logged In User'}
+                </p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                  {currentUser.email}
+                </p>
+              </div>
+              <button
+                onClick={() => {
+                  onClose();
+                  logout();
+                }}
+                className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 transition-colors"
+              >
+                <LogOut size={14} /> Sign Out
+              </button>
             </div>
-          </div>
-
-          <button
-            onClick={() => {
-              onClose();
-              logout();
-            }}
-            className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 transition-colors"
-          >
-            <LogOut size={14} /> Log Out
-          </button>
+          ) : (
+            <Link
+              to="/login"
+              onClick={onClose}
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-500 shadow-md shadow-emerald-600/20 transition-all text-center"
+            >
+              <LogIn size={16} /> Sign In
+            </Link>
+          )}
         </div>
       </aside>
     </>
   );
 };
+

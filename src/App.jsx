@@ -4,7 +4,6 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { PlantProvider } from './contexts/PlantContext';
 import { WeatherProvider } from './contexts/WeatherContext';
-import { Navbar } from './components/Navbar';
 import { Sidebar } from './components/Sidebar';
 import { Footer } from './components/Footer';
 import { ProtectedRoute } from './components/ProtectedRoute';
@@ -36,13 +35,10 @@ export default function App() {
           <WeatherProvider>
             <Router>
               <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
-                
-                <Navbar toggleSidebar={() => setSidebarOpen(prev => !prev)} />
+                <div className="flex-1 flex flex-col lg:flex-row max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                  <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(prev => !prev)} />
 
-                <div className="flex-1 flex max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-                  <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-
-                  <main className="flex-1 min-w-0 lg:pl-8">
+                  <main className="flex-1 min-w-0 lg:pl-8 pt-4 lg:pt-0">
                     <Routes>
                       {/* Public routes */}
                       <Route path="/" element={<Home />} />
@@ -77,3 +73,4 @@ export default function App() {
     </ThemeProvider>
   );
 }
+
